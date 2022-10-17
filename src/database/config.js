@@ -1,10 +1,11 @@
-{
+const path = require("path");
+
+const dbname = process.env.NODE_ENV === "development" ? "movie-library" : "movie-library.test";
+
+module.exports = {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "storage": path.join(__dirname, "..", "storage", `${dbname}.sqlite`),
+    "dialect": "sqlite"
   },
   "test": {
     "username": "root",
