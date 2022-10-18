@@ -10,4 +10,4 @@ yarn-error.log*
 # config files
 .env
 
-storage*
+/src/storage*
