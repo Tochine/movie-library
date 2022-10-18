@@ -1,6 +1,11 @@
 const path = require("path");
+const env = require("dotenv");
 
-const dbname = process.env.NODE_ENV === "development" ? "movie-library" : "movie-library.test";
+env.config({
+  path: process.env.ENV_FILE_PATH,
+});
+
+const dbname = process.env.NODE_ENV !== "development" ? "movie-library.test" : "movie-library";
 
 module.exports = {
   "development": {
@@ -8,17 +13,11 @@ module.exports = {
     "dialect": "sqlite"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "storage": path.join(__dirname, "..", "storage", `${dbname}.sqlite`),
+    "dialect": "sqlite"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "storage": path.join(__dirname, "..", "storage", `${dbname}.sqlite`),
+    "dialect": "sqlite"
   }
 }
